@@ -6,6 +6,7 @@
   --green: #cdff00;
   --red: #ff3440;
   --grey: #2b2b2b;
+  --blue: #347aff;
 }
 
 @theme inline {
@@ -15,6 +16,7 @@
   --color-green: var(--green);
   --color-red: var(--red);
   --color-grey: var(--grey);
+  --color-blue: var(--blue);
 
   /* font */
   --font-normal: var(--font-lufgaRegular), sans-serif;

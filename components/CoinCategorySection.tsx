@@ -55,15 +55,15 @@ export default function CoinCategorySection() {
       <h1 className="mb-6 text-[40px] capitalize">markets</h1>
       <div>
         <div className="mb-6 flex">
-          <div className="border-green flex gap-2 border-b px-5 py-2 text-xl">
+          <div className="border-green flex cursor-pointer gap-2 border-b px-5 py-2 text-xl">
             <span>🔥</span>
             <span>Featured</span>
           </div>
-          <div className="flex gap-2 border-b border-white/10 px-5 py-2 text-xl">
+          <div className="flex cursor-pointer gap-2 border-b border-white/10 px-5 py-2 text-xl">
             <span>🚀</span>
             <span className="text-white/50">Top Gainers</span>
           </div>
-          <div className="flex gap-2 border-b border-white/10 px-5 py-2 text-xl">
+          <div className="flex cursor-pointer gap-2 border-b border-white/10 px-5 py-2 text-xl">
             <span>🚨</span>
             <span className="text-white/50">Top Losers</span>
           </div>
