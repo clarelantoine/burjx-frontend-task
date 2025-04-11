@@ -3,6 +3,7 @@ import { formatPriceWithCommas } from "@/utils/utils";
 import React from "react";
 import SparklineChart from "./SparkLineChart";
 import CoinInfo from "./CoinInfo";
+import PricePercentageChangeBadge from "./PricePercentageChangeBadge";
 
 type Props = {
   coin: Coin;
@@ -18,15 +19,7 @@ export default function CategoryItemCard({ coin }: Props) {
       />
       <div className="flex items-center justify-between">
         <p>{`$ ${formatPriceWithCommas(coin.currentPrice)}`}</p>
-        {coin.priceChangePercentage24h > 0 ? (
-          <p className="text-green rounded-lg bg-white/5 px-2 py-1 text-sm">
-            {`+ ${coin.priceChangePercentage24h.toFixed(2)} %`}
-          </p>
-        ) : (
-          <p className="text-red rounded-lg bg-white/5 px-2 py-1 text-sm">
-            {`- ${coin.priceChangePercentage24h.toFixed(2).replace("-", "")} %`}
-          </p>
-        )}
+        <PricePercentageChangeBadge value={coin.priceChangePercentage24h} />
       </div>
     </div>
   );

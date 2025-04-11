@@ -9,11 +9,19 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@tanstack/react-query": "^5.72.2",
+    "@tanstack/react-query-devtools": "^5.72.2",
+    "apexcharts": "^4.5.0",
+    "axios": "^1.8.4",
     "clsx": "^2.1.1",
+    "framer-motion": "^12.6.3",
+    "lightweight-charts": "^5.0.5",
     "lucide-react": "^0.487.0",
+    "motion": "^12.6.3",
     "next": "15.2.5",
     "prettier-plugin-tailwindcss": "^0.6.11",
     "react": "^19.0.0",
+    "react-apexcharts": "^1.7.0",
     "react-dom": "^19.0.0",
     "recharts": "^2.15.2"
   },

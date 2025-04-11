@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import Header from "@/components/Header";
+import Provider from "@/utils/Provider";
 
 const lufgaLight = localFont({
   src: "../public/assets/fonts/LufgaLight.woff2",
@@ -30,8 +31,10 @@ export default function RootLayout({
         className={`${lufgaLight.variable} ${lufgaRegular.variable} font-normal antialiased`}
       >
         <main className="m-auto max-w-[1440px] px-12.5 py-10">
-          <Header />
-          {children}
+          <Provider>
+            <Header />
+            {children}
+          </Provider>
         </main>
       </body>
     </html>

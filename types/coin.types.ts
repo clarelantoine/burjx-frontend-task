@@ -10,3 +10,16 @@ export interface Coin {
   tradingVolume: number;
   symbol: string;
 }
+
+interface CurrencyPrice {
+  open: number;
+  high: number;
+  low: number;
+  close: number;
+}
+
+export interface CoinPriceData {
+  date: number;
+  usd: CurrencyPrice;
+  aed: CurrencyPrice;
+}

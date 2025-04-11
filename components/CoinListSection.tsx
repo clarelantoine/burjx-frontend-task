@@ -1,78 +1,56 @@
 "use client";
 
-import { Coin } from "@/types/coin.types";
-import { Info } from "lucide-react";
-import React, { useEffect, useState } from "react";
 import CoinListRow from "./CoinListRow";
+import { useInfiniteQuery } from "@tanstack/react-query";
+import { fetchPaginatedCoins } from "@/app/actions/coin.actions";
+import { useRef } from "react";
+import CoinListHeader from "./CoinListHeader";
+import { useInfiniteScroll } from "@/hooks/useInfiniteScroll";
 
-type Props = {};
+export default function CoinListSection() {
+  const { data, error, fetchNextPage, hasNextPage, isFetchingNextPage } =
+    useInfiniteQuery({
+      queryKey: ["coinList"],
+      queryFn: ({ pageParam }) => fetchPaginatedCoins({ pageParam }),
+      initialPageParam: 1,
+      getNextPageParam: (lastPage, allPages) => {
+        return lastPage.length === 10 ? allPages.length + 1 : undefined;
+      },
+    });
 
-export default function CoinListSection({}: Props) {
-  const [coins, setCoins] = useState<Coin[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
+  const loaderRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    async function fetchCoins() {
-      try {
-        const res = await fetch(
-          "https://coingeko.burjx.com/coin-prices-all?currency=usd&page=1&pageSize=10",
-        );
-        if (!res.ok) {
-          throw new Error("Failed to fetch data");
-        }
-        const { data } = await res.json();
-
-        // console.log(data);
-
-        setCoins(data);
-      } catch (error) {
-        if (error instanceof Error) setError("Failed to load coins.");
-      } finally {
-        setLoading(false);
+  useInfiniteScroll({
+    targetRef: loaderRef,
+    onIntersect: () => {
+      if (hasNextPage && !isFetchingNextPage) {
+        fetchNextPage();
       }
-    }
+    },
+    enabled: hasNextPage && !isFetchingNextPage,
+  });
 
-    fetchCoins();
-  }, []);
-
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>{error}</p>;
+  if (error) <h2>{error.message}</h2>;
 
   return (
     <section>
       <h1 className="mb-6 text-[40px] capitalize">all coins</h1>
       <div>
-        <div className="flex items-center gap-10 px-5 py-3">
-          {/* header */}
-          <div className="flex-1 text-xs font-light text-white/50 capitalize">
-            market name
-          </div>
-          <div className="flex flex-1 items-center gap-2 text-xs font-light text-white/50 capitalize">
-            <span>market cap</span>
-            <Info className="stroke-blue" width={15} height={15} />
-          </div>
-          <div className="flex flex-1 items-center gap-2 text-xs font-light text-white/50 capitalize">
-            <span>trading volume</span>
-            <Info className="stroke-blue" width={15} height={15} />
-          </div>
-          <div className="flex-1 text-xs font-light text-white/50 capitalize">
-            24h chart
-          </div>
-          <div className="flex-1 text-xs font-light text-white/50 capitalize">
-            price
-          </div>
-          <div className="flex-1 text-xs font-light text-white/50 capitalize">
-            24h change
-          </div>
-        </div>
+        <CoinListHeader />
 
         {/* rows */}
         <div className="flex flex-col gap-1">
-          {coins.map((coin) => (
-            <CoinListRow key={coin.id} coin={coin} />
-          ))}
+          {data?.pages.map((page) =>
+            page.map((coin, coinIndex) => (
+              <CoinListRow key={coin.id} coin={coin} coinIndex={coinIndex} />
+            )),
+          )}
         </div>
+
+        <div ref={loaderRef} className="h-10" />
+
+        {/* Show loading state if fetching next page */}
+        {isFetchingNextPage && <p>Loading more...</p>}
       </div>
     </section>
   );
