@@ -5,7 +5,7 @@ import BurjXLogoSvg from "../svg/BurjXLogoSvg";
 export default function Header() {
   const pathname = usePathname();
 
-  console.log(pathname);
+  // console.log(pathname);
 
   return (
     pathname == "/" && (
