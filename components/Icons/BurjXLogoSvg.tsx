@@ -1,4 +1,6 @@
-export default function BurjXLogo() {
+"use client";
+
+export default function BurjXLogoSvg() {
   return (
     <svg
       viewBox="0 0 548 141"

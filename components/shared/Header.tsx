@@ -1,6 +1,6 @@
 "use client";
 import { usePathname } from "next/navigation";
-import BurjXLogo from "../icons/BurjXLogo";
+import BurjXLogoSvg from "../icons/BurjXLogoSvg";
 
 export default function Header() {
   const pathname = usePathname();
@@ -10,7 +10,7 @@ export default function Header() {
   return (
     pathname == "/" && (
       <div className="mb-8 flex items-center justify-center max-sm:mb-15">
-        <BurjXLogo />
+        <BurjXLogoSvg />
       </div>
     )
   );
