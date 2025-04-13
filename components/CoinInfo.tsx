@@ -6,19 +6,21 @@ type Props = {
   name: string;
   symbol: string;
   className?: string;
+  variant?: "button" | "card" | "row";
 };
 
 export default function CoinInfo({ image, name, symbol, className }: Props) {
   return (
     <div className={clsx("", className)}>
-      <div className="flex gap-3">
+      <div className="flex items-center gap-3">
         <Image
           src={image}
           alt={symbol}
           sizes="100%"
           width={40}
           height={40}
-          className="aspect-square rounded-full"
+          className="aspect-square shrink-0 rounded-full"
+          priority
         />
         <div className="flex flex-col justify-between">
           <p className="text-[16px] uppercase">{symbol}</p>

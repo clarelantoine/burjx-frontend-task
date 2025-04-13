@@ -2,22 +2,23 @@
 // import { fetchAllCoins } from "@/app/actions/coin.actions";
 import CategoryItemCard from "./CategoryItemCard";
 import { useQuery } from "@tanstack/react-query";
-import { fetchCoinData } from "@/service/coingecko-burjx";
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useFilteredCoins } from "@/hooks/useFilteredCoins";
 import CoinCategoryTab from "./CoinCategoryTab";
 import { tabs } from "@/data";
+import { fetchAllCoins } from "@/service/api/coingecko-burjx";
+// import { fetchAllCoins } from "@/app/actions/coin.actions";
 
 export default function CoinCategorySection() {
   const [activeTab, setActiveTab] = useState("featured");
 
   const { data, error } = useQuery({
     queryKey: ["coins"],
-    queryFn: fetchCoinData,
+    queryFn: fetchAllCoins,
     refetchInterval: 10000,
     refetchIntervalInBackground: true,
-    staleTime: 10000,
+    // staleTime: 10000,
   });
 
   const filteredData = useFilteredCoins(data, activeTab);
@@ -47,11 +48,13 @@ export default function CoinCategorySection() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -15 }}
             transition={{ duration: 0.2 }}
-            className="flex min-h-[200px] gap-1 overflow-x-auto"
+            className="scrollbar-hide flex snap-x snap-mandatory gap-1 overflow-x-auto"
           >
             {filteredData &&
               filteredData.map((coin) => (
-                <CategoryItemCard key={coin.id} coin={coin} />
+                <div key={coin.id} className="w-60 shrink-0 snap-start">
+                  <CategoryItemCard coin={coin} />
+                </div>
               ))}
           </motion.div>
         </AnimatePresence>

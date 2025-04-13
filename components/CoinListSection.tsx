@@ -2,10 +2,10 @@
 
 import CoinListRow from "./CoinListRow";
 import { useInfiniteQuery } from "@tanstack/react-query";
-import { fetchPaginatedCoins } from "@/app/actions/coin.actions";
 import { useRef } from "react";
 import CoinListHeader from "./CoinListHeader";
 import { useInfiniteScroll } from "@/hooks/useInfiniteScroll";
+import { fetchPaginatedCoins } from "@/service/api/coingecko-burjx";
 
 export default function CoinListSection() {
   const { data, error, fetchNextPage, hasNextPage, isFetchingNextPage } =
@@ -16,6 +16,9 @@ export default function CoinListSection() {
       getNextPageParam: (lastPage, allPages) => {
         return lastPage.length === 10 ? allPages.length + 1 : undefined;
       },
+      refetchInterval: 10000,
+      refetchIntervalInBackground: true,
+      // staleTime: 10000,
     });
 
   const loaderRef = useRef<HTMLDivElement>(null);
@@ -30,7 +33,7 @@ export default function CoinListSection() {
     enabled: hasNextPage && !isFetchingNextPage,
   });
 
-  if (error) <h2>{error.message}</h2>;
+  if (error) return <h2>{error.message}</h2>;
 
   return (
     <section>

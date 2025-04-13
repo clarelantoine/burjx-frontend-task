@@ -2,7 +2,7 @@
 
 import clsx from "clsx";
 import React from "react";
-import { LineChart, Line, ResponsiveContainer, Tooltip, YAxis } from "recharts";
+import { LineChart, Line, ResponsiveContainer, YAxis } from "recharts";
 
 type Props = {
   data: number[];
@@ -38,7 +38,7 @@ export default function SparklineChart({
             strokeWidth={1}
             dot={false}
           />
-          <Tooltip
+          {/* <Tooltip
             contentStyle={{
               background: "#111",
               border: "none",
@@ -46,7 +46,7 @@ export default function SparklineChart({
               fontSize: "12px",
             }}
             formatter={(value: number) => [`$${value.toFixed(2)}`, "Price"]}
-          />
+          /> */}
         </LineChart>
       </ResponsiveContainer>
     </div>

@@ -1,4 +1,4 @@
-"use server";
+// "use server";
 
 import { Coin, CoinPriceData } from "@/types/coin.types";
 
@@ -36,14 +36,14 @@ export const getCoinOhlcByProductID = async (productID: number) => {
   try {
     const res = await fetch(
       `https://coingeko.burjx.com/coin-ohlc?productId=${productID}&days=30`,
-      {
-        headers: {
-          // Add headers that mimic a browser request from localhost
-          Origin: "http://localhost:3000", // Use your actual port
-          Referer: "http://localhost:3000/",
-        },
-        next: { revalidate: 60 },
-      },
+      // {
+      //   headers: {
+      //     // Add headers that mimic a browser request from localhost
+      //     Origin: "http://localhost:3000", // Use your actual port
+      //     Referer: "http://localhost:3000/",
+      //   },
+      //   next: { revalidate: 60 },
+      // },
     );
 
     if (!res.ok) {
@@ -52,7 +52,7 @@ export const getCoinOhlcByProductID = async (productID: number) => {
     }
 
     const data = await res.json();
-    // console.log("data:", data);
+    console.log("data:", data);
     return data as CoinPriceData[];
     // const coins = data as Coin[];
   } catch (error) {
@@ -63,7 +63,7 @@ export const getCoinOhlcByProductID = async (productID: number) => {
 export const fetchPaginatedCoins = async ({
   pageParam,
 }: {
-  pageParam?: number;
+  pageParam: number;
 }): Promise<Coin[]> => {
   try {
     const res = await fetch(
@@ -84,7 +84,7 @@ export const fetchPaginatedCoins = async ({
     }
 
     const { data } = await res.json();
-    console.log(data);
+    console.log("fetchPaginatedCoins");
 
     return data as Coin[];
   } catch (error) {
@@ -112,7 +112,7 @@ export const fetchAllCoins = async (): Promise<Coin[]> => {
     }
 
     const { data } = await res.json();
-    console.log(data);
+    console.log("fetchAllCoins");
 
     return data as Coin[];
   } catch (error) {
