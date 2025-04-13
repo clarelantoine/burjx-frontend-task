@@ -1,6 +1,6 @@
 "use client";
 import { usePathname } from "next/navigation";
-import BurjXLogoSvg from "../icons/BurjXLogoSvg";
+import BurjXLogoSvg from "../svg/BurjXLogoSvg";
 
 export default function Header() {
   const pathname = usePathname();

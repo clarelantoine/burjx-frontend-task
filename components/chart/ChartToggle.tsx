@@ -1,8 +1,8 @@
 import { motion, LayoutGroup } from "framer-motion";
 
 import clsx from "clsx";
-import LineChartIcon from "../icons/LineChartIcon";
-import CandleStickIcon from "../icons/CandleStickIcon";
+import LineChartIcon from "../svg/LineChartIcon";
+import CandleStickIcon from "../svg/CandleStickIcon";
 
 export default function ChartToggle({
   isCandlestick,
