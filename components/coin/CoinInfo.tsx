@@ -23,7 +23,7 @@ export default function CoinInfo({ image, name, symbol, className }: Props) {
           priority
         />
         <div className="flex flex-col justify-between">
-          <p className="text-[16px] uppercase max-sm:text-sm">{symbol}</p>
+          <p className="max-sm:text-sm` text-[16px] uppercase">{symbol}</p>
           <p className="text-xs font-light text-white/50">{name}</p>
         </div>
       </div>
