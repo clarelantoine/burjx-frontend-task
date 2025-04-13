@@ -1,4 +1,4 @@
-import { Coin } from "@/types/coin.types";
+import { Coin } from "@/types/coin.interface";
 import clsx from "clsx";
 import { ChevronDown } from "lucide-react";
 import Image from "next/image";
@@ -15,7 +15,7 @@ export default function SearchButton({ coin, className, onClick }: Props) {
   return (
     <div
       className={clsx(
-        "bg-grey/30 flex w-fit rounded-3xl border border-white/10 p-5",
+        "bg-grey/30 hover:bg-grey/10 flex w-fit cursor-pointer rounded-3xl border border-white/10 p-2 max-sm:p-2",
         className,
       )}
       onClick={onClick}
@@ -27,16 +27,16 @@ export default function SearchButton({ coin, className, onClick }: Props) {
           sizes="100%"
           width={40}
           height={40}
-          className="aspect-square shrink-0 rounded-full"
+          className="aspect-square shrink-0 rounded-full max-sm:w-8"
           priority
         />
 
-        <p className="flex gap-1 text-xl">
+        <p className="flex gap-1 text-sm">
           <span>{name}</span>
           <span className="uppercase">({symbol})</span>
         </p>
 
-        <ChevronDown className="stroke-white/50" width={20} height={20} />
+        <ChevronDown className="stroke-green" width={20} height={20} />
       </div>
     </div>
   );

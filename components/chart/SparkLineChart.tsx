@@ -17,15 +17,18 @@ export default function SparklineChart({
   height = 40,
   className,
 }: Props) {
-  // Transform raw array to chart-friendly format
   const formattedData = data.map((price, index) => ({
     index,
     price,
   }));
 
   return (
-    <div className={clsx("w-full", className)}>
-      <ResponsiveContainer width="100%" height={height}>
+    <div className={clsx("w-full cursor-pointer", className)}>
+      <ResponsiveContainer
+        width="100%"
+        height={height}
+        className="pointer-events-none"
+      >
         <LineChart
           data={formattedData}
           //   margin={{ top: 5, right: 10, left: 10, bottom: 5 }}
@@ -38,15 +41,6 @@ export default function SparklineChart({
             strokeWidth={1}
             dot={false}
           />
-          {/* <Tooltip
-            contentStyle={{
-              background: "#111",
-              border: "none",
-              borderRadius: "0.5rem",
-              fontSize: "12px",
-            }}
-            formatter={(value: number) => [`$${value.toFixed(2)}`, "Price"]}
-          /> */}
         </LineChart>
       </ResponsiveContainer>
     </div>

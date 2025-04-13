@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import { Info } from "lucide-react";
 
 const ListHeader = [
@@ -7,19 +8,24 @@ const ListHeader = [
   {
     text: "market cap",
     icon: <Info className="stroke-blue" width={15} height={15} />,
+    className: "max-sm:hidden max-lg:hidden",
   },
   {
     text: "trading volume",
     icon: <Info className="stroke-blue" width={15} height={15} />,
+    className: "max-sm:hidden max-lg:hidden",
   },
   {
     text: "24h chart",
+    className: "max-sm:hidden",
   },
   {
     text: "price",
+    className: "max-sm:justify-center",
   },
   {
     text: "24h change",
+    className: "max-sm:justify-end",
   },
 ];
 
@@ -29,7 +35,10 @@ export default function CoinListHeader() {
       {ListHeader.map((item) => (
         <div
           key={item.text}
-          className="flex flex-1 items-center gap-2 text-xs font-light text-white/50 capitalize"
+          className={clsx(
+            "flex flex-1 items-center gap-2 text-xs font-light text-white/50 capitalize",
+            item?.className,
+          )}
         >
           <span>{item.text}</span>
           {item.icon}

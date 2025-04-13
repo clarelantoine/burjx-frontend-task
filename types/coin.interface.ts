@@ -1,3 +1,4 @@
+// coin interface - Coin[] for array
 export interface Coin {
   productId: number;
   id: string;
@@ -11,6 +12,7 @@ export interface Coin {
   symbol: string;
 }
 
+// ohlc data typw
 interface CurrencyPrice {
   open: number;
   high: number;
@@ -18,6 +20,7 @@ interface CurrencyPrice {
   close: number;
 }
 
+// coin ohlc data (USD/AED)
 export interface CoinPriceData {
   date: number;
   usd: CurrencyPrice;

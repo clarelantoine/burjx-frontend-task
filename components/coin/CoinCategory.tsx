@@ -1,19 +1,19 @@
 "use client";
-// import { fetchAllCoins } from "@/app/actions/coin.actions";
-import CategoryItemCard from "./CategoryItemCard";
-import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 import { AnimatePresence, motion } from "framer-motion";
 import { useFilteredCoins } from "@/hooks/useFilteredCoins";
 import CoinCategoryTab from "./CoinCategoryTab";
-import { tabs } from "@/data";
-import { fetchAllCoins } from "@/service/api/coingecko-burjx";
-// import { fetchAllCoins } from "@/app/actions/coin.actions";
 
-export default function CoinCategorySection() {
+import { fetchAllCoins } from "@/service/api/coingecko-burjx";
+import CoinCard from "./CoinCard";
+import { tabs } from "@/constants";
+import CoinCategoryLoadingSkeleton from "./CoinCategoryLoadingSkeleton";
+
+export default function CoinCategory() {
   const [activeTab, setActiveTab] = useState("featured");
 
-  const { data, error } = useQuery({
+  const { data, error, isLoading } = useQuery({
     queryKey: ["coins"],
     queryFn: fetchAllCoins,
     refetchInterval: 10000,
@@ -27,7 +27,9 @@ export default function CoinCategorySection() {
 
   return (
     <section>
-      <h1 className="mb-6 text-[40px] capitalize">markets</h1>
+      <h1 className="mb-6 text-[40px] capitalize max-lg:text-3xl max-sm:text-2xl">
+        markets
+      </h1>
       <div>
         <motion.div layout className="mb-6 flex">
           {tabs.map((tab) => (
@@ -40,7 +42,6 @@ export default function CoinCategorySection() {
           ))}
         </motion.div>
 
-        {/* animated cards*/}
         <AnimatePresence mode="wait">
           <motion.div
             key={activeTab}
@@ -50,22 +51,15 @@ export default function CoinCategorySection() {
             transition={{ duration: 0.2 }}
             className="scrollbar-hide flex snap-x snap-mandatory gap-1 overflow-x-auto"
           >
+            {isLoading && <CoinCategoryLoadingSkeleton />}
             {filteredData &&
               filteredData.map((coin) => (
-                <div key={coin.id} className="w-60 shrink-0 snap-start">
-                  <CategoryItemCard coin={coin} />
+                <div key={coin.id} className="shrink-0 snap-start">
+                  <CoinCard coin={coin} />
                 </div>
               ))}
           </motion.div>
         </AnimatePresence>
-
-        {/* unanimated cards */}
-        {/* <div key={activeTab} className="flex gap-1 overflow-x-auto">
-          {filteredData &&
-            filteredData.map((coin) => (
-              <CategoryItemCard key={coin.id} coin={coin} />
-            ))}
-        </div> */}
       </div>
     </section>
   );

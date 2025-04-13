@@ -1,21 +1,16 @@
-export default function LogoSvg() {
+export default function BurjXLogo() {
   return (
     <svg
-      width="548"
-      height="141"
       viewBox="0 0 548 141"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      className="h-auto w-[548px] max-lg:w-100 max-sm:w-40"
     >
       <path
-        fillRule="evenodd"
-        clipRule="evenodd"
         d="M464.404 67.2565L429.283 115.679H454.551L477.139 82.6311L500.061 115.679H525.465L514.056 99.8631L514.02 99.8434L489.585 67.066L484.303 59.9799L477.866 51.3452L477.848 51.37L477.17 50.4115L476.879 50.0217L476.87 49.9876L456.046 20.5834H431.049L464.404 67.2565ZM484.705 41.505L496.828 57.0376L523.156 20.5834H499.246L484.705 41.505Z"
         fill="white"
       />
       <path
-        fillRule="evenodd"
-        clipRule="evenodd"
         d="M496.768 57.0365L523.095 20.5835H499.186L484.645 41.5038L496.768 57.0365Z"
         fill="white"
       />
@@ -32,8 +27,6 @@ export default function LogoSvg() {
         fill="white"
       />
       <path
-        fillRule="evenodd"
-        clipRule="evenodd"
         d="M24.6181 52.1502L30.4038 46.3927L36.1896 52.1502L30.4038 57.9077L24.6181 52.1502ZM22.5694 88.8236L30.3975 81.0336L38.2257 88.8236L30.3975 96.6136L22.5694 88.8236ZM74.9295 100.61L58.0228 117.425L41.1161 100.61L58.0228 83.7761L65.5347 91.2514L74.9295 100.61ZM32.5103 69.1022L45.2738 56.401L58.0372 69.1022L45.2738 81.8035L32.5103 69.1022Z"
         fill="#CDFF00"
       />

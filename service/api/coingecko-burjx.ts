@@ -1,54 +1,48 @@
 import axios from "axios";
+import { Coin, CoinPriceData } from "@/types/coin.interface";
 
-import { Coin, CoinPriceData } from "@/types/coin.types";
+const BASE_URL = "https://coingeko.burjx.com";
 
-export const getCoinOhlcByProductID = async (
+// service for fetching the coin ohlc endpoint with query productId and timeframe
+export const fetchCoinOhlc = async (
   productID: number,
   timeframe: number | string,
-) => {
+): Promise<CoinPriceData[]> => {
   try {
-    const { data: priceData }: { data: CoinPriceData[] } = await axios(
-      `https://coingeko.burjx.com/coin-ohlc?productId=${productID}&days=${timeframe}`,
+    const { data } = await axios.get<CoinPriceData[]>(
+      `${BASE_URL}/coin-ohlc?productId=${productID}&days=${timeframe}`,
     );
-    return priceData;
+    return data;
   } catch (error) {
-    console.log("getCoinOhlcByProductID", error);
+    throw new Error(`Failed to fetch OHLC data: ${error}`);
   }
 };
 
+// service for fetching the coin pages with query page number (keeping size 10 harcoded, but can refactor if need be)
 export const fetchPaginatedCoins = async ({
   pageParam,
 }: {
   pageParam: number;
-}) => {
+}): Promise<Coin[]> => {
   try {
-    const { data } = await axios(
-      `https://coingeko.burjx.com/coin-prices-all?currency=usd&page=${pageParam}&pageSize=10`,
+    const { data } = await axios.get<{ data: Coin[] }>(
+      `${BASE_URL}/coin-prices-all?currency=usd&page=${pageParam}&pageSize=10`,
     );
-
-    const coins: Coin[] = data.data;
-    return coins;
+    return data.data;
   } catch (error) {
-    console.log("fetchPaginatedCoins", error);
-    throw error;
+    throw new Error(`Failed to fetch paginated coins: ${error}`);
   }
 };
 
-export const fetchAllCoins = async () => {
+// service for fetching all coins
+export const fetchAllCoins = async (): Promise<Coin[]> => {
   try {
-    const { data } = await axios(
-      "https://coingeko.burjx.com/coin-prices-all?currency=usd&page=1&pageSize=100",
+    const { data } = await axios.get<{ data: Coin[] }>(
+      `${BASE_URL}/coin-prices-all?currency=usd&page=1&pageSize=100`,
     );
-
-    const coins: Coin[] = data.data;
-    return coins;
+    return data.data;
   } catch (error) {
-    console.log("fetchAllCoins", error);
-    throw error;
+    console.error("fetchAllCoins", error);
+    throw new Error(`Failed to fetch all coins: ${error}`);
   }
-};
-
-export const getCoinByID = async (coinId: string) => {
-  const coins = await fetchAllCoins();
-  return coins.find((coin) => coin.id === coinId);
 };

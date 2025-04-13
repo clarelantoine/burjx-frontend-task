@@ -19,11 +19,11 @@ export default function CoinInfo({ image, name, symbol, className }: Props) {
           sizes="100%"
           width={40}
           height={40}
-          className="aspect-square shrink-0 rounded-full"
+          className="aspect-square shrink-0 rounded-full max-sm:w-8"
           priority
         />
         <div className="flex flex-col justify-between">
-          <p className="text-[16px] uppercase">{symbol}</p>
+          <p className="text-[16px] uppercase max-sm:text-sm">{symbol}</p>
           <p className="text-xs font-light text-white/50">{name}</p>
         </div>
       </div>

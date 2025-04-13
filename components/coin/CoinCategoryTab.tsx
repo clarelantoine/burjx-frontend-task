@@ -24,7 +24,7 @@ export default function CoinCategoryTab({
       onClick={() => setActiveTab(tab.id)}
       transition={{ type: "spring", stiffness: 700, damping: 30 }}
       className={clsx(
-        "relative flex cursor-pointer items-center gap-2 px-5 py-2 text-xl transition-colors duration-200",
+        "relative flex cursor-pointer items-center gap-2 px-5 py-2 text-xl transition-colors duration-200 max-sm:flex-1 max-sm:px-2 max-sm:text-sm",
         activeTab === tab.id ? "text-white" : "text-white/50",
       )}
     >
